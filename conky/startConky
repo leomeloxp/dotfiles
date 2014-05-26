@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ "$(pidof conky)" ]; then
+    killall conky
+fi
+sleep 30
+#conky -c ~/.conky/scripts/Clock &
+#conky -c ~/.conky/scripts/BottomRight &
+conky -c ~/.conky/scripts/Drives &
+#conky -c ~/.conky/scripts/Leo &
+sleep 5
+conky -c ~/.conky/scripts/MiddleRight &
+conky -c ~/.conky/scripts/Media

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+	<menu id="apps" label="アップリ">
+			<separator />
+			<item label="Chromium"><action name="Execute"><command>chromium</command>
+			</action></item>
+		    <item label="Deluge"><action name="Execute"><command><![CDATA[deluge-gtk]]></command>
+			</action></item>
+			<item label="Emacs"><action name="Execute"><command>emacsclient -t -a ""</command>
+			</action></item>
+		    <item label="Geany"><action name="Execute"><command><![CDATA[geany]]></command>
+			</action></item>
+			<item label="Leafpad"><action name="Execute"><command><![CDATA[leafpad]]></command>
+			</action></item>
+			<item label="PulseAudio Volume Control"><action name="Execute"><command><![CDATA[pavucontrol]]></command>
+			</action></item>
+		    <item label="Spacefm"><action name="Execute"><command>spacefm</command>
+			</action></item>
+		    <item label="Terminal"><action name="Execute"><command>lxterminal</command>
+			</action></item>
+			<item label="VLC"><action name="Execute"><command><![CDATA[/usr/bin/vlc --started-from-file]]></command>
+			</action></item>
+		<menu id="openbox-Graphics" label="Graphics">
+			<item label="Feh"><action name="Execute"><command><![CDATA[feh]]></command>
+			</action></item>
+			<item label="GIMP"><action name="Execute"><command><![CDATA[gimp-2.8]]></command>
+			</action></item>
+			<item label="gscreenshot"><action name="Execute"><command><![CDATA[gscreenshot]]></command>
+			</action></item>
+		</menu>
+		<menu id="openbox-Office" label="Office">
+			<item label="LibreOffice"><action name="Execute"><command><![CDATA[libreoffice]]></command>
+			</action></item>
+			<item label="LibreOffice Calc"><action name="Execute"><command><![CDATA[libreoffice --calc]]></command>
+			</action></item>
+			<item label="LibreOffice Writer"><action name="Execute"><command><![CDATA[libreoffice --writer]]></command>
+			</action></item>
+		</menu>
+		<menu id="openbox-System" label="System Tools">
+			<item label="GParted"><action name="Execute"><command><![CDATA[/usr/bin/gparted_polkit]]></command>
+			</action></item>
+			<item label="Grub Customizer"><action name="Execute"><command><![CDATA[grub-customizer]]></command>
+			</action></item>
+			<item label="UXTerm"><action name="Execute"><command><![CDATA[uxterm]]></command>
+			</action></item>
+		</menu>
+	</menu>
+	
+  <menu id="obfb-home" label="ファイル" execute="obfilebrowser /data --term 'lxterminal -e %s' --no-parent --no-self --no-hidden" />
+  <menu id="dirlist-menu" label="ファイル" execute="/home/leo/.config/openbox/dirlist.pl /data" />
+  <menu id="deluge" label="トレント" execute="/home/leo/.config/openbox/obdeluge.sh"/>
+  <menu id="obmpc" label="音楽" execute="/home/leo/.config/openbox/obmpc.sh" />
+
+  <menu id="sys" label="システム">
+    <separator />
+   		<item label="ARandR"><action name="Execute"><command><![CDATA[arandr]]></command>
+		</action></item>
+		<item label="Customise Look and Feel"><action name="Execute"><command><![CDATA[lxappearance]]></command>
+		</action></item>
+		<item label="Input Method"><action name="Execute"><command><![CDATA[uim-pref-gtk]]></command>
+		</action></item>
+		<item label="Openbox Configuration Manager"><action name="Execute"><command><![CDATA[obconf]]></command>
+		</action></item>
+		<item label="SCIM Input Method"><action name="Execute"><command><![CDATA[scim-setup]]></command>
+		</action></item>
+  </menu>
+
+  <menu id="session" label="セッション">
+    <separator />
+    <item label="reconf">
+      <action name="Reconfigure" />
+    </item>
+    <item label="exit">
+      <action name="Exit">
+	<prompt>yes</prompt>
+      </action>
+    </item>
+    <separator />
+    <item label="reboot">
+      <action name="Execute">
+	<command>systemctl reboot</command>
+      </action>
+    </item>
+<item label="shutdown">
+      <action name="Execute">
+	<command>systemctl poweroff</command>
+      </action>
+    </item>
+  </menu>
+
+  <menu id="root-menu" label="kenshin">
+    <separator label="剣心" />
+    <item label="実行"><action name="Execute"><command>gmrun</command></action></item>
+    <menu id="apps"/>
+    <menu id="obfb-home"/>
+    <menu id="obmpc" />
+    <menu id="deluge"/>
+    <menu id="sys"/>
+    <menu id="session"/>
+  </menu>
+  
+</openbox_menu>

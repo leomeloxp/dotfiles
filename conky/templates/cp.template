@@ -1,0 +1,5 @@
+${font Liberation Mono:size=10:bold}#
+${if_match "[status]" == "o"}${color #AADBF2}•[alias]${endif}#
+${if_match "[status]" == "v"}${color #44FF88}•[alias]${endif}#
+${if_match "[status]" == "w"}${color #4488FF}•[alias]${endif}#
+${if_match "[status]" == "x"}${color #FF4444}•[alias]${endif}

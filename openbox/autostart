@@ -1,0 +1,25 @@
+## Autostart File ##
+
+## HDMI check ##
+/bin/sh /srv/git/scripts/hdmi
+
+## Real transparency ##
+compton -b
+
+## Conky ##
+sleep 2 
+conky -c ~/.conky/scripts/main &
+
+## Wallpaper ##
+(sleep 1s && sh ~/.fehbg) &
+
+## Dropbox
+dropboxd &
+
+## Others ##
+volnoti &
+#synapse -s &
+emacs --daemon &
+pcmanfm -d &
+#lxpanel -p kenshin &
+tint2 &

@@ -1,0 +1,155 @@
+################################################################################
+## 				Leo's Conky Scripts			      ##
+################################################################################
+
+# Sidebar Script v0.6 01/05/2011
+# Sidebar Script v0.7 15/03/2014
+################################################################################
+## 				    DISCLAIMER  			      ##
+################################################################################
+#This script is part of @leomeloxp's Conky Scripts set up. If you are using it,#
+#feel free to change it at your own way (and risk!).All the Scripts were first #
+#made to be used in a  1366x768 Laptop Monitor. If your resolution differs from#
+#the one specified, you might have to change the positioning settings under    #
+#the Script Specific section below. That's it, hope you enjoy the script =]    #
+################################################################################
+##			   Script Universal Set up Start		      ##
+################################################################################
+background no
+update_interval 1		#Script Update Interval (seconds).
+total_run_times 0		#Number of times Conky runs before quitting.
+override_utf8_locale yes	
+use_spacer left			#Stop objects from moving other things around.
+use_xft yes			#Better font rendering(?)
+xftfont Terminus:size=9		#xft font to use
+double_buffer yes		#Prevents Flickering
+no_buffers yes
+text_buffer_size 1024
+own_window yes			#Create a Window to draw
+own_window_type panel		#Window Type
+own_window_argb_visual yes
+own_window_argb_value  200
+own_window_colour 2D2D2D
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+draw_shades no
+draw_outline no
+draw_borders no
+################################################################################
+##	 		   Script Specific Set up Start
+################################################################################
+
+alignment top_right 		#Conky's Alignment on the screen
+minimum_size 250 100		#Minimum Conky's Window Size
+maximum_width 250		#Maximum Window Width
+border_inner_margin 0
+gap_x 0
+gap_y 0
+cpu_avg_samples 2
+net_avg_samples 2
+
+################################################################################
+##				Default Colours
+################################################################################
+default_color DCDCDC
+
+color1 0099CC #Holo
+color2 9933CC #Violet
+color3 669900 #green
+color4 FF8800 #orange
+color5 CC0000 #red
+color6 AAAAAA #light grey white
+color7 484848 #Dark grey bar
+################################################################################
+##				Templates
+################################################################################
+
+template1 ${top name \1}$alignc${top pid \1}${alignr}${top cpu \1}%
+
+template2 ${top_mem name \1}$alignc${top_mem pid \1}${alignr}${top_mem mem_res \1}
+
+template3 \1${color}${font}${alignc -23}${fs_used \2}/${fs_size \2}$alignr${fs_used_perc \2}%\n${fs_bar 2 \2}\$
+
+template4 \1${color}${font}${alignc -23}${fs_used \2}/${fs_size \2}$alignr${fs_used_perc \2}%\n${fs_bar 2 \2}\n
+
+################################################################################
+##				Script Printable Area Start		      
+################################################################################
+TEXT
+################################################################################
+##				Clock
+################################################################################
+${voffset -16}
+${color1}${font Roboto Condensed Light:size=36}${time %H:%M}${color7}${voffset 8}${cpubar 50,1}${color1}#
+#Weekday with Japanese Locale#
+${alignr}${voffset -33}${font Droid Sans Fallback:size=10}${alignr 8}${execi 100 export LC_TIME=ja_JP.UTF-8 && date +%x}
+${alignr 42}${font Droid Sans Fallback:size=14}${execi 1800 export LC_TIME=ja_JP.UTF-8 && date +%A}${font}${voffset 8}
+################################################################################
+##  Computer, System and Monitoring Section
+################################################################################
+${color7}${hr}${color}
+${font Roboto Condensed Light:bold:size=8}${color4}COMPUTER ${color}${font}
+${font}Uptime $alignr${uptime}
+CPU Temperature ${alignr}${color4}${hwmon 1 temp 1}°C${color}
+Remaining Battery$alignr${battery_percent BAT0}%
+Volume ${alignr}${exec pamixer --get-volume}
+RAM${color3}${alignc} ${mem} / ${memmax} ${alignr} ${memperc}%${color}
+################################################################################
+#Processor
+################################################################################
+${color7}${hr}${color}
+${font Roboto Condensed Light:bold:size=8}${color4}PROCESSORS ${color}${font}
+CPU ${color2}$alignc${cpu cpu0}% ${alignr}${cpu cpu1}%${color}
+${template1 1}
+${template1 2}
+${template1 3}
+################################################################################
+##			Network Information Section			      ##
+################################################################################
+${if_existing /proc/net/route}${color7}${hr}${color}
+${font Roboto Condensed Light:bold:size=8}${color4}NETWORK ${color} ${font}
+${if_existing /proc/net/route enp4s0}#
+Wired ${Alignr}enp4s0
+IP $Alignr${addrs enp4s0}
+Down: ${color3}${downspeed enp4s0}/s${color}${alignr}Up: ${color3}${upspeed enp4s0}/s${color}
+Total: ${totaldown enp4s0}${alignr}Total: ${totalup enp4s0}
+${voffset -4}${color3}${downspeedgraph enp4s0 15,124 484848 0099CC}${alignr 1}${color3}${upspeedgraph enp4s0 15,125 484848 0099CC}
+${endif}#
+${if_existing /proc/net/route wlp2s0}#
+Wi-fi ${color2}$alignc${wireless_link_qual_perc wlp2s0}% $Alignr${wireless_essid wlp2s0}${color}
+IP $Alignr${addrs wlp2s0}
+Down: ${color3}${downspeed wlp2s0}/s${color}${alignr}Up: ${color3}${upspeed wlp2s0}/s${color}
+${voffset -4}${downspeedgraph wlp2s0 15,124 484848 0099CC}${alignr 1}${upspeedgraph wlp2s0 15,125 484848 0099CC}
+${endif}#
+################################################################################
+##				DELUGE			      ##
+################################################################################
+${color7}${hr}${color}
+${font Roboto Condensed Light:bold:size=8}${color4}DELUGE ${color} ${font}
+${execpi 7 conkyDeluge -U deluge -P delugeftw -b queue -l 2 -at /srv/git/scripts/conkyDeluge.template}
+################################################################################
+##				File System				      ##
+################################################################################
+${color7}${hr}${color}
+${font Roboto Condensed Light:bold:size=8}${color4}FILE SYSTEM ${color} ${font}
+#Root Partition
+${template3 Root /}
+#Home Partition
+${template4 Data /data}#
+################################################################################
+##				MPD Section			    	      ##
+################################################################################
+${if_mpd_playing}#
+${color7}${hr}${color}
+${font Roboto Condensed Light:bold:size=8}${color4}MUSIC PLAYER${font}${color}
+${font Droid Sans Fallback:size=10}${mpd_title}${font}
+${font Droid Sans Fallback:size=8}$mpd_artist${alignr}$mpd_album${font}
+${color1}${mpd_bar 2}${color}
+${mpd_elapsed} ${alignc}[$mpd_status][R:${color3}${mpd_repeat}${color} S:${color3}${mpd_random}${color}]${alignr}${mpd_length}
+${endif}#
+################################################################################
+##				CALENDAR Section		    	      ##
+################################################################################
+${color7}${hr}${color}
+${font Wen QuanYi Micro Hei Mono:size=14}${color}#
+${color1}日 月 火 水 木 金 土 ${font Terminus:size=14}${color}
+${alignc 40}${color7}${execpi 60 export LC_TIME=ja_JP.UTF-8 && DJS=`date +%_d`; cal | sed -e '1d' -e '2d' -e s/"\(^\|[^0-9]\)$DJS"'\b'/'\1${font Terminus:bold:size=14}${color2}'"$DJS"'${font Terminus:size=14}$color'/}${voffset -42}
