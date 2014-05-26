@@ -1,0 +1,187 @@
+#############################################################################
+##	Leo's i3 Config File
+#############################################################################
+
+
+
+
+## Set mod key to Win Key
+set $mod Mod4
+
+## Terminus font with somewhat okay  unicode support
+font pango:Terminus 11px
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec lxterminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym Mod1+F4 kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+i focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left exec mpc prev
+bindsym $mod+Down exec mpc stop
+bindsym $mod+Up exec mpc toggle
+bindsym $mod+Right exec mpc next
+
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+i move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym F1 workspace kenshin
+bindsym F2 workspace media
+bindsym F3 workspace dev
+bindsym F4 workspace chat
+bindsym $mod+F1 workspace 5
+bindsym $mod+F2 workspace 6
+bindsym $mod+F3 workspace 7
+bindsym $mod+F4 workspace 8
+
+# move focused container to workspace
+bindsym Shift+F1 move container to workspace kenshin
+bindsym Shift+F2 move container to workspace media
+bindsym Shift+F3 move container to workspace dev
+bindsym Shift+F4 move container to workspace chat
+bindsym $mod+Shift+F1 move container to workspace 5
+bindsym $mod+Shift+F2 move container to workspace 6
+bindsym $mod+Shift+F3 move container to workspace 7
+bindsym $mod+Shift+F4 move container to workspace 8
+
+##############################################################################
+## Session MGMT
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym i resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+##########################################
+## Leo's Custom Settings
+##########################################
+
+hide_edge_borders vertical
+popup_during_fullscreen leave_fullscreen
+#########################################
+## Application Launching
+#########################################
+setxkbmap gb extd
+## HDMI check ##
+exec /srv/git/scripts/hdmi
+## Real transparency ##
+exec compton -b
+## Wallpaper #
+exec ~/.fehbg
+## Dropbox
+exec dropboxd
+## Others
+execvolnoti 
+#synapse -s 
+#exec emacs --daemon 
+exec pcmanfm -d 
+
+########################################
+## Alt+Tab
+bindsym Mod1+Tab focus right
+bindsym Mod1+Shift+Tab focus left
+bindsym $mod+Tab workspace back_and_forth
+
+########################################
+## Quick Application Launching
+
+bindsym $mod+1 exec pcmanfm
+bindsym $mod+2 exec lxterminal
+bindsym $mod+3 exec emacsclient -c
+bindsym $mod+4 exec chromium
+
+########################################
+## Volume Keys
+
+bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol up
+bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol down
+bindsym XF86AudioMute exec /srv/git/scripts/volcontrol toggle
+bindsym $mod+Prior exec mpc volume +5
+bindsym $mod+Next exec mpc volume -5
+
+
+focus_follows_mouse no
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+   # output            LVDS1
+   # output	      HDMI1
+    status_command    python /home/leo/.config/i3/i3status.py
+    position          top
+   # mode              dock
+    workspace_buttons yes
+   # tray_output       LVDS1
+    }
