@@ -1,3 +1,4 @@
+;-*- mode: emacs-lisp -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs custom set vaiables, not alter by any user
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,13 +9,12 @@
  ;; If there is more than one, they won't work right.
  '(TeX-PDF-mode t)
  '(TeX-engine (quote xetex))
- '(TeX-master nil t)
+ '(TeX-master nil)
  '(ansi-color-names-vector ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(blink-cursor-mode t)
  '(column-number-mode t)
  '(custom-enabled-themes (quote (deeper-blue)))
  '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
- '(display-battery-mode t)
  '(display-time-mode t)
  '(gnutls-min-prime-bits 2048)
  '(holiday-bahai-holidays nil)
@@ -49,16 +49,18 @@
  '(mingus-mpd-root "/srv/mpd/music")
  '(mingus-playlist-separator "-|-")
  '(mingus-use-ido-mode-p t)
- '(org-agenda-files (quote ("~/org/japan.org" "~/org/personal.org")))
+ '(org-agenda-files (quote ("~/org/codex/codex.org" "~/org/japan.org" "~/org/personal.org")))
+ '(org-agenda-start-on-weekday 0)
  '(org-habit-show-habits-only-for-today nil)
  '(org-hide-leading-stars t)
+ '(org-image-actual-width (quote (200)))
  '(org-log-into-drawer t)
  '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-bookmark)))
  '(org-startup-truncated nil)
+ '(org-startup-with-inline-images t)
  '(save-place t nil (saveplace))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
- '(size-indication-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -83,8 +85,6 @@
 (setq initial-major-mode 'org-mode)
 ;; Add some loadpaths
 (add-to-list 'load-path  "~/.emacs.d")
-;; Kill scratch
-(kill-buffer "*scratch*")
 ;;Load private file
 (load "~/.emacs.d/init-credentials")
 
@@ -95,8 +95,8 @@
 ;; Start Ido mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(ido-mode 1) 	       
-(setq ido-use-filename-at-point 'guess) 
+(ido-mode 1)
+(setq ido-use-filename-at-point 'guess)
 (require 'ido-vertical-mode)
 (ido-mode 1)
 (ido-vertical-mode 1)
@@ -202,8 +202,8 @@
 ;; Transparency
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
-(set-frame-parameter (selected-frame) 'alpha '(93 90))
-(add-to-list 'default-frame-alist '(alpha 93 90))
+;(set-frame-parameter (selected-frame) 'alpha '(93 90))
+;(add-to-list 'default-frame-alist '(alpha 93 90))
 
 ;; (eval-when-compile (require 'cl))
 ;; (defun toggle-transparency ()
@@ -223,12 +223,6 @@
 (global-set-key (kbd "C-w") 'clipboard-kill-region)
 (global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
 (global-set-key (kbd "C-y") 'clipboard-yank)
-
-;; delete and backspace behaviour
-(global-set-key (kbd "C-?") 'mark-paragraph)
-(global-set-key (kbd "M-?") 'help-command)
-(global-set-key (kbd "C-h") 'delete-backward-char)
-(global-set-key (kbd "M-h") 'backward-kill-word)
 
 ;; Undo/Redo
 (global-set-key (kbd "C-z") 'undo) ; 【Ctrl+z】
@@ -329,8 +323,8 @@
 ;; Orgmode Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; var declaration
-(setq org-mobile-inbox-for-pull "~/org/notes.org")
-(setq org-mobile-directory "/data/Documents/Dropbox/MobileOrg")
+;(setq org-mobile-inbox-for-pull "~/org/notes.org")
+;(setq org-mobile-directory "/data/Documents/Dropbox/MobileOrg")
 (setq org-directory "/data/Documents/org-mode")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
@@ -353,48 +347,48 @@
               ("HOLD" :foreground "magenta" :weight bold)
               ("CANCELLED" :foreground "forest green" :weight bold))))
 
-;; Auto-run Mobile Pull
-(require 'org)
-(org-mobile-pull) ;; run org-mobile-pull at startup
+;; ;;Auto-run Mobile Pull
+;; (require 'org)
+;; (org-mobile-pull) ;; run org-mobile-pull at startup
 
-(defun install-monitor (file secs)
-  (run-with-timer
-   0 secs
-   (lambda (f p)
-     (unless (< p (second (time-since (elt (file-attributes f) 5))))
-       (org-mobile-pull)))))
+;; (defun install-monitor (file secs)
+;;   (run-with-timer
+;;    0 secs
+;;    (lambda (f p)
+;;      (unless (< p (second (time-since (elt (file-attributes f) 5))))
+;;        (org-mobile-pull)))))
 
-(install-monitor (file-truename
-                  (concat
-                   (file-name-as-directory org-mobile-directory)
-                          org-mobile-capture-file))
-                 5)
+;; (install-monitor (file-truename
+;;                   (concat
+;;                    (file-name-as-directory org-mobile-directory)
+;;                           org-mobile-capture-file))
+;;                  5)
 
-;; Do a pull every 5 minutes to circumvent problems with timestamping
-;; (ie. dropbox bugs)
-(run-with-timer 0 (* 5 60) 'org-mobile-pull)
+;; ;; Do a pull every 5 minutes to circumvent problems with timestamping
+;; ;; (ie. dropbox bugs)
+;; (run-with-timer 0 (* 5 60) 'org-mobile-pull)
 
-;; Auto-run Mobile Push
-(defvar org-mobile-push-timer nil
-  "Timer that `org-mobile-push-timer' used to reschedule itself, or nil.")
+;; ;; Auto-run Mobile Push
+;; (defvar org-mobile-push-timer nil
+;;   "Timer that `org-mobile-push-timer' used to reschedule itself, or nil.")
 
-(defun org-mobile-push-with-delay (secs)
-  (when org-mobile-push-timer
-    (cancel-timer org-mobile-push-timer))
-  (setq org-mobile-push-timer
-        (run-with-idle-timer
-         (* 1 secs) nil 'org-mobile-push)))
+;; (defun org-mobile-push-with-delay (secs)
+;;   (when org-mobile-push-timer
+;;     (cancel-timer org-mobile-push-timer))
+;;   (setq org-mobile-push-timer
+;;         (run-with-idle-timer
+;;          (* 1 secs) nil 'org-mobile-push)))
 
-(add-hook 'after-save-hook
- (lambda ()
-   (when (eq major-mode 'org-mode)
-     (dolist (file (org-mobile-files-alist))
-      (if (string= (file-truename (expand-file-name (car file)))
-		   (file-truename (buffer-file-name)))
-           (org-mobile-push-with-delay 30)))
-   )))
+;; (add-hook 'after-save-hook
+;;  (lambda ()
+;;    (when (eq major-mode 'org-mode)
+;;      (dolist (file (org-mobile-files-alist))
+;;       (if (string= (file-truename (expand-file-name (car file)))
+;; 		   (file-truename (buffer-file-name)))
+;;            (org-mobile-push-with-delay 30)))
+;;    )))
 
-(run-at-time "00:05" 86400 '(lambda () (org-mobile-push-with-delay 1))) ;; refreshes agenda file each day
+;; (run-at-time "00:05" 86400 '(lambda () (org-mobile-push-with-delay 1))) ;; refreshes agenda file each day
 
 ;; Change beamer alert to bold
 (defun my-beamer-bold (contents backend info)
@@ -420,3 +414,37 @@
 (load-file "~/.emacs.d/elpa/mingus/mingus-stays-home.el")
 (require 'libmpdee)
 (global-set-key (kbd "C-S-j") 'mingus-query)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Resize Windows
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "C-<") 'shrink-window-horizontally)
+(global-set-key (kbd "C->") 'enlarge-window-horizontally)
+;;(global-set-key (kbd "C-<down>") 'shrink-window)
+;;(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Flyspell and ispell keybindings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "<f8>") 'ispell-word)
+(global-set-key (kbd "C-S-<f8>") 'flyspell-mode)
+(global-set-key (kbd "C-M-<f8>") 'flyspell-buffer)
+(global-set-key (kbd "C-<f8>") 'flyspell-check-previous-highlighted-word)
+(defun flyspell-check-next-highlighted-word ()
+  "Custom function to spell check next highlighted word"
+  (interactive)
+  (flyspell-goto-next-error)
+  (ispell-word)
+  )
+(global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
+
+;; Fix Latex error report
+(setq LaTeX-command-style '(("beamer" "%(PDF)%(latex) -file-line-error %S%(PDFout)") ("" "%(PDF)%(latex) %S%(PDFout)")))
+
+;; Windmove windows
+(require 'switch-window)
+(global-set-key (kbd "C-x o") 'switch-window)
+
+;; Kill scratch
+(kill-buffer "*scratch*")

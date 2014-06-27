@@ -48,9 +48,9 @@
 	</menu>
 	
   <menu id="obfb-home" label="ファイル" execute="obfilebrowser /data --term 'lxterminal -e %s' --no-parent --no-self --no-hidden" />
-  <menu id="dirlist-menu" label="ファイル" execute="/home/leo/.config/openbox/dirlist.pl /data" />
-  <menu id="deluge" label="トレント" execute="/home/leo/.config/openbox/obdeluge.sh"/>
-  <menu id="obmpc" label="音楽" execute="/home/leo/.config/openbox/obmpc.sh" />
+  <menu id="dirlist-menu" label="ファイル" execute="~/.config/openbox/dirlist.pl /data" />
+  <menu id="deluge" label="トレント" execute="~/.config/openbox/obdeluge.sh"/>
+  <menu id="obmpc" label="音楽" execute="~/.config/openbox/obmpc.sh" />
 
   <menu id="sys" label="システム">
     <separator />

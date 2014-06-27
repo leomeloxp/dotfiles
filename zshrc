@@ -13,3 +13,4 @@ compinit
 
 ## CHange TERM to work with emacs
 export TERM="xterm-256color"
+eval $(ssh-agent) && ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
