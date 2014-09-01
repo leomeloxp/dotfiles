@@ -1,0 +1,102 @@
+#####################################
+## leomeloxp's ncmpcpp config file ##
+#####################################
+## Core Settings
+ncmpcpp_directory = "~/.ncmpcpp"
+lyrics_directory = "~/.lyrics"
+mpd_host = "localhost"
+mpd_port = "6600"
+mpd_music_dir = "/srv/mpd/music/"
+##Top bar
+alternative_header_first_line_format = "$b$5{%t}|{%f}$9$/b"
+alternative_header_second_line_format = "{{$7$b%a$/b}{ $8-$9 $7%b$9}{ ($4%y$9)}}"
+##Playlist
+song_columns_list_format = "(3f)[white]{nr:#}(40)[cyan]{t|f:Title} (25)[magenta]{a} (30)[blue]{br} (6f)[green]{lr:Length}"
+song_list_format = "$8│$7%t$9 $R$6%b$8│$5%a$8│$3%l$8│"
+now_playing_prefix = "$b"
+now_playing_suffix = "$/b"
+## Playlist mode
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+autocenter_mode = "yes"
+progressbar_look = "─◾ "
+##Main interface
+user_interface = "alternative" (classic/alternative)
+media_library_left_column = "g" (possible values: a,y,g,c,p, legend above)
+default_space_mode = "add"
+follow_now_playing_lyrics = "yes"
+fetch_lyrics_for_current_song_in_background = "yes"
+store_lyrics_in_song_dir = "yes"
+#display_screens_numbers_on_start = "yes"
+display_bitrate = "yes"
+ignore_leading_the = "yes"
+empty_tag_marker = "[empty]"
+media_library_disable_two_column_mode = "yes"
+## Colour Settings
+colors_enabled = "yes"
+empty_tag_color = "cyan"
+header_window_color = "cyan"
+volume_color = "cyan"
+state_line_color = "cyan"
+state_flags_color = "cyan"
+main_window_color = "cyan"
+color1 = "cyan"
+color2 = "green"
+main_window_highlight_color = "cyan"
+progressbar_color = "cyan"
+statusbar_color = "cyan"
+alternative_ui_separator_color = "white"
+active_column_color = "green"
+
+##Default Settings
+#execute_on_song_change = ""
+#playlist_show_remaining_time = "no"
+playlist_shorten_total_times = "yes"
+## Legend
+##### song format #####
+## %l - length
+## %f - filename
+## %D - directory
+## %a - artist
+## %A - album artist
+## %t - title
+## %b - album
+## %y - year
+## %n - track number (01/12 -> 01)
+## %N - full track info (01/12 -> 01/12)
+## %g - genre
+## %c - composer
+## %p - performer
+## %d - disc
+## %C - comment
+## $R - begin right alignment
+##
+## - 0 - default window color (discards all other colors)
+## - 1 - black
+## - 2 - red
+## - 3 - green
+## - 4 - yellow
+## - 5 - blue
+## - 6 - magenta
+## - 7 - cyan
+## - 8 - white
+## - 9 - end of current color
+## - b - bold text
+## - u - underline text
+## - r - reverse colors
+## - a - use alternative character set
+##### columns settings #####
+## (width of column)[column's color]{displayed tag}
+## - color is optional (if you want the default one, type [])
+## - r - column will be right aligned
+## - E - if tag is empty, empty tag marker won't be displayed
+## - give a column custom name by putting it after attributes,
+##   separated with character ':', e.g. {lr:Length} gives you
+##   right aligned column of lengths named "Length".
+## - define sequence of tags, that have to be displayed in case
+##   predecessor is empty in a way similar to the one in classic
+##   song format, i.e. using '|' character, e.g. {a|c|p:Owner}
+##   creates column named "Owner" that tries to display artist
+##   tag and then composer and performer if previous ones are
+##   not available.
