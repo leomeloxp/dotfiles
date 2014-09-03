@@ -64,12 +64,12 @@ status.register("wireless",
                 format_up="{essid} {quality:03.0f}%",)
 
 # Shows disk available space
-status.register("disk",
-                path="/data",
-                format="data:{avail}G",)
+# status.register("disk",
+#                 path="/data",
+#                 format="data:{avail}G",)
 status.register("disk",
                 path="/",
-                format="root:{avail}G",)
+                format="ssd:{avail}G",)
 
 # weather
 status.register("weather",
@@ -87,7 +87,7 @@ status.register("pulseaudio",
 
 # Shows mpd status
 status.register("mpd",
-                format="{status} {title} - {artist}, {album}",
+                format="{status} {title} - {artist} \[ {album} \]",
                 status={
                     "pause": "▷",
                     "play": "▶",
