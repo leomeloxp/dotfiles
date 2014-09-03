@@ -1,67 +1,44 @@
 #############################################################################
 ##	Leo's i3 Config File
 #############################################################################
-
-
-
-
 ## Set mod key to Win Key
 set $mod Mod4
-
 ## Terminus font with somewhat okay  unicode support
-font pango:Terminus 10px
-
+font pango:Terminus 12px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 # start a terminal
 #bindsym $mod+Return exec lxterminal
-
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym Mod1+F4 kill
-
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
+bindsym $mod+d exec --no-startup-id dmenu_run -l 5 -p "%"s
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+i focus up
 bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left exec mpc prev
-bindsym $mod+Down exec mpc stop
-bindsym $mod+Up exec mpc toggle
-bindsym $mod+Right exec mpc next
-
-
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+i move up
 bindsym $mod+Shift+l move right
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-
 # split in horizontal orientation
 bindsym $mod+h split h
-
 # split in vertical orientation
 bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
-
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -77,33 +54,35 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym F1 workspace kenshin
-bindsym F2 workspace media
-bindsym F3 workspace dev
-bindsym F4 workspace chat
-bindsym $mod+F1 workspace gimp
-bindsym $mod+F2 workspace 6
-bindsym $mod+F3 workspace 7
-bindsym $mod+F4 workspace 8
+bindsym F1 workspace 1:mayuri
+bindsym F2 workspace 2:deving
+bindsym F3 workspace 3:internet
+bindsym F4 workspace 4:other
+bindsym $mod+F1 workspace 5:gimp
+bindsym $mod+F2 workspace 6:
+bindsym $mod+F3 workspace 7:
+bindsym $mod+F4 workspace 8:
 
 # move focused container to workspace
-bindsym Shift+F1 move container to workspace kenshin
-bindsym Shift+F2 move container to workspace media
-bindsym Shift+F3 move container to workspace dev
-bindsym Shift+F4 move container to workspace chat
-bindsym $mod+Shift+F1 move container to workspace gimp
-bindsym $mod+Shift+F2 move container to workspace 6
-bindsym $mod+Shift+F3 move container to workspace 7
-bindsym $mod+Shift+F4 move container to workspace 8
+bindsym Shift+F1 move container to workspace 1:mayuri
+bindsym Shift+F2 move container to workspace 2:deving
+bindsym Shift+F3 move container to workspace 3:internet
+bindsym Shift+F4 move container to workspace 4:other
+bindsym $mod+Shift+F1 move container to workspace 5:gimp
+bindsym $mod+Shift+F2 move container to workspace 6:
+bindsym $mod+Shift+F3 move container to workspace 7:
+bindsym $mod+Shift+F4 move container to workspace 8:
 
-##############################################################################
+########################################
 ## Session MGMT
-
+########################################
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+########################################
 # resize window (you can also use the mouse for that)
+########################################
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
         bindsym j resize shrink width 5 px or 5 ppt
@@ -128,44 +107,83 @@ bindsym $mod+r mode "resize"
 ##########################################
 ## Leo's Custom Settings
 ##########################################
-
 hide_edge_borders vertical
 popup_during_fullscreen leave_fullscreen
+
+
 #########################################
 ## Application Launching
 #########################################
-exec setxkbmap gb extd
+exec --no-startup-id setxkbmap gb extd
 ## HDMI check ##
-exec /srv/git/scripts/hdmi
+exec --no-startup-id /srv/git/scripts/hdmi
 ## Others
-exec volnoti 
+exec --no-startup-id volnoti 
 #synapse -s 
-exec pcmanfm -d 
+exec --no-startup-id pcmanfm -d 
 # Start tilda
-exec tilda
+exec --no-startup-id tilda -h
+# Start emacs daemon
+exec --no-startup-id emacs --daemon
+
+
+########################################
+## Workspace assignments
+########################################
+
+assign [class="Chromium"] 3:internet
+assign [class="emacs"] 2:deving
+new_window 1pixel
 
 ########################################
 ## Alt+Tab
-#bindsym Mod1+Tab focus right
-#bindsym Mod1+Shift+Tab focus left
-#bindsym $mod+Tab workspace back_and_forth
+########################################
+bindsym Mod1+Tab focus right
+bindsym Mod1+Shift+Tab focus left
+bindsym $mod+Tab workspace back_and_forth
 
 ########################################
 ## Quick Application Launching
-
+########################################
 bindsym $mod+1 exec pcmanfm
 #bindsym $mod+2 exec lxterminal
 bindsym $mod+3 exec emacsclient -c
 bindsym $mod+4 exec chromium
+bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/mpd2twitter.py
+
+########################################
+## MPD Controlling
+########################################
+##Playback Control
+bindsym $mod+Left exec mpc prev
+bindsym $mod+Down exec mpc stop
+bindsym $mod+Up exec mpc toggle
+bindsym $mod+Right exec mpc next
+
+## MPD Internal Volume
+bindsym $mod+Prior exec mpc volume +5
+bindsym $mod+Next exec mpc volume -5
+
 
 ########################################
 ## Volume Keys
+########################################
 
-bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol up
-bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol down
-bindsym XF86AudioMute exec /srv/git/scripts/volcontrol toggle
-bindsym $mod+Prior exec mpc volume +5
-bindsym $mod+Next exec mpc volume -5
+## HDMI
+bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 0 down
+bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 0 up
+bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 0 toggle
+
+## Analog Audio
+bindsym Shift+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 1 down
+bindsym Shift+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 1 up
+bindsym Shift+XF86AudioMute exec /srv/git/scripts/volcontrol 1 toggle
+
+## Combined Sink
+bindsym $mod+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 2 down
+bindsym $mod+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 2 up
+bindsym $mod+XF86AudioMute exec /srv/git/scripts/volcontrol 2 toggle
+
 
 focus_follows_mouse no
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -174,5 +192,6 @@ bar {
     status_command    python ~/.config/i3/i3status.py
     position          top
     workspace_buttons yes
-    tray_output	      LVDS1
+    tray_output	      HDMI1
+    strip_workspace_numbers yes
     }
