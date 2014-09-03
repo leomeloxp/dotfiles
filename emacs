@@ -9,7 +9,7 @@
  ;; If there is more than one, they won't work right.
  '(TeX-PDF-mode t)
  '(TeX-engine (quote xetex))
- '(TeX-master nil)
+ '(TeX-master nil t)
  '(ansi-color-names-vector ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(blink-cursor-mode t)
  '(column-number-mode t)
@@ -24,6 +24,9 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice "~/org/notes.org")
  '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(jabber-alert-info-wave "/srv/data/Documents/sounds/codecopen.wav")
+ '(jabber-alert-message-wave "/srv/data/Documents/sounds/codecopen.wav")
+ '(jabber-alert-muc-wave "/srv/data/Documents/sounds/codecopen.wav")
  '(jabber-alert-presence-hooks nil)
  '(jabber-avatar-verbose t)
  '(jabber-browse-buffer-format "*jabber-browse:-%n*")
