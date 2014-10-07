@@ -7,6 +7,7 @@ lyrics_directory = "~/.lyrics"
 mpd_host = "localhost"
 mpd_port = "6600"
 mpd_music_dir = "/srv/mpd/music/"
+external_editor = "leafpad"
 
 ##Top bar
 alternative_header_first_line_format = "$b$5{%t}|{%f}$9$/b"
@@ -32,10 +33,10 @@ song_status_format = "$b$7%t $1• $6%a $1• $5%b/$b"
 display_bitrate = "yes"
 ignore_leading_the = "yes"
 empty_tag_marker = "[empty]"
-media_library_disable_two_column_mode = "yes"
+#media_library_disable_two_column_mode = "yes"
 
 ##Others
-media_library_left_column = "g" (possible values: a,y,g,c,p, legend above)
+#media_library_left_column = "g" (possible values: a,y,g,c,p, legend above)
 default_space_mode = "add"
 follow_now_playing_lyrics = "yes"
 fetch_lyrics_for_current_song_in_background = "yes"

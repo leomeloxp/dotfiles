@@ -55,8 +55,8 @@ bindsym $mod+a focus parent
 
 # switch to workspace
 bindsym F1 workspace 1:mayuri
-bindsym F2 workspace 2:deving
-bindsym F3 workspace 3:internet
+bindsym F2 workspace 2:web
+bindsym F3 workspace 3:code
 bindsym F4 workspace 4:other
 bindsym $mod+F1 workspace 5:gimp
 bindsym $mod+F2 workspace 6:
@@ -65,8 +65,8 @@ bindsym $mod+F4 workspace 8:
 
 # move focused container to workspace
 bindsym Shift+F1 move container to workspace 1:mayuri
-bindsym Shift+F2 move container to workspace 2:deving
-bindsym Shift+F3 move container to workspace 3:internet
+bindsym Shift+F2 move container to workspace 2:web
+bindsym Shift+F3 move container to workspace 3:code
 bindsym Shift+F4 move container to workspace 4:other
 bindsym $mod+Shift+F1 move container to workspace 5:gimp
 bindsym $mod+Shift+F2 move container to workspace 6:
@@ -131,10 +131,10 @@ exec --no-startup-id emacs --daemon
 ## Workspace assignments
 ########################################
 
-assign [class="Chromium"] 3:internet
-assign [class="emacs"] 2:deving
+assign [class="Chromium"] 2:web
+assign [class="emacs"] 3:code
 new_window 1pixel
-
+new_float normal
 ########################################
 ## Alt+Tab
 ########################################
@@ -146,7 +146,7 @@ bindsym $mod+Tab workspace back_and_forth
 ## Quick Application Launching
 ########################################
 bindsym $mod+1 exec pcmanfm
-#bindsym $mod+2 exec lxterminal
+bindsym $mod+Shift+2 exec lxterminal
 bindsym $mod+3 exec emacsclient -c
 bindsym $mod+4 exec chromium
 bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/mpd2twitter.py
