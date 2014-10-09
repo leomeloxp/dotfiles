@@ -60,7 +60,7 @@ status.register("network",
 #
 # Note: requires both netifaces and basiciw
 status.register("wireless",
-                interface="wlp2s0",
+                interface="wlp12s0",
                 format_up="{essid} {quality:03.0f}%",)
 
 # Shows disk available space
