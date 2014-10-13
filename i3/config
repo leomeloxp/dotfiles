@@ -13,8 +13,8 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 bindsym Mod1+F4 kill
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -l 5 -p "%"s
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id dmenu_run -l 5 -p "%"s
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -133,6 +133,7 @@ exec --no-startup-id emacs --daemon
 
 assign [class="Chromium"] 2:web
 assign [class="emacs"] 3:code
+assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 4:other
 new_window 1pixel
 new_float normal
 ########################################
@@ -155,7 +156,7 @@ bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/mpd2twitter.py
 ## MPD Controlling
 ########################################
 ##Playback Control
-bindsym $mod+Left exec mpc prev
+bindsym $mod+Left exec /srv/git/scripts/mpcPrevSong.sh
 bindsym $mod+Down exec mpc stop
 bindsym $mod+Up exec mpc toggle
 bindsym $mod+Right exec mpc next
