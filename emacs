@@ -9,7 +9,7 @@
  ;; If there is more than one, they won't work right.
  '(TeX-PDF-mode t)
  '(TeX-engine (quote xetex))
- '(TeX-master nil t)
+ '(TeX-master nil)
  '(ansi-color-names-vector ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(blink-cursor-mode t)
  '(column-number-mode t)
@@ -57,6 +57,7 @@
  '(org-habit-show-habits-only-for-today nil)
  '(org-hide-leading-stars t)
  '(org-image-actual-width (quote (200)))
+ '(org-latex-pdf-process (quote ("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f")))
  '(org-log-into-drawer t)
  '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-bookmark)))
  '(org-startup-truncated nil)
