@@ -136,7 +136,7 @@ workspace "2:web" output HDMI1
 workspace "3:code" output VGA1
 
 assign [class="Chromium"] 2:web
-assign [class="emacs"] 3:code
+assign [class="Emacs"] 3:code
 assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 4:other
 new_window 1pixel
 new_float normal
