@@ -131,6 +131,10 @@ exec --no-startup-id emacs --daemon
 ## Workspace assignments
 ########################################
 
+#workspace "1:mayuri" output VGA1
+workspace "2:web" output HDMI1
+workspace "3:code" output VGA1
+
 assign [class="Chromium"] 2:web
 assign [class="emacs"] 3:code
 assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 4:other
