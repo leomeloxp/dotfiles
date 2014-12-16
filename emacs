@@ -10,29 +10,30 @@
  '(TeX-PDF-mode t)
  '(TeX-engine (quote xetex))
  '(TeX-master nil)
- '(ansi-color-names-vector ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
+ '(ansi-color-names-vector
+   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(blink-cursor-mode t)
  '(column-number-mode t)
- '(custom-enabled-themes (quote (deeper-blue)))
- '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-safe-themes
+   (quote
+    ("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(display-time-mode t)
+ '(global-undo-tree-mode t)
  '(gnutls-min-prime-bits 2048)
  '(holiday-bahai-holidays nil)
  '(holiday-general-holidays nil)
  '(holiday-hebrew-holidays nil)
  '(holiday-islamic-holidays nil)
  '(inhibit-startup-screen t)
- '(initial-buffer-choice "~/org/notes.org")
+ '(initial-buffer-choice "~/documents/notes.org")
  '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(jabber-alert-info-wave "/srv/data/Documents/sounds/codecopen.wav")
- '(jabber-alert-message-wave "/srv/data/Documents/sounds/codecopen.wav")
- '(jabber-alert-muc-wave "/srv/data/Documents/sounds/codecopen.wav")
  '(jabber-alert-presence-hooks nil)
  '(jabber-avatar-verbose t)
  '(jabber-browse-buffer-format "*jabber-browse:-%n*")
  '(jabber-chat-buffer-format "*jabber-%n*")
  '(jabber-default-status "@emacs")
- '(jabber-history-dir "~/documents/chat-history")
+ '(jabber-history-dir "~/.emacs.d/chat-history")
  '(jabber-history-enabled t)
  '(jabber-history-size-limit 4096)
  '(jabber-libnotify-urgency "normal")
@@ -52,26 +53,125 @@
  '(mingus-mpd-root "/srv/mpd/music")
  '(mingus-playlist-separator "-|-")
  '(mingus-use-ido-mode-p t)
- '(org-agenda-files (quote ("~/org/codex/codex.org" "~/org/japan.org" "~/org/personal.org")))
+ '(org-agenda-files
+   (quote
+    ("~/documents/notes.org" "~/documents/personal.org" "~/documents/codex/codex.org")))
  '(org-agenda-start-on-weekday 0)
  '(org-habit-show-habits-only-for-today nil)
  '(org-hide-leading-stars t)
  '(org-image-actual-width (quote (200)))
- '(org-latex-pdf-process (quote ("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f")))
+ '(org-latex-pdf-process
+   (quote
+    ("xelatex -interaction nonstopmode %f" "xelatex -interaction nonstopmode %f")))
  '(org-log-into-drawer t)
- '(org-modules (quote (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-bookmark)))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-bookmark)))
  '(org-startup-truncated nil)
  '(org-startup-with-inline-images t)
+ '(rich-minority-mode t)
+ '(rm-base-text-properties
+   (quote
+    ((quote help-echo)
+     (quote rm--help-echo)
+     (quote mouse-face)
+     (quote mode-line-highlight)
+     (quote local-map)
+     (quote mode-line-minor-mode-keymap)
+     (quote face)
+     (quote sml/folder))))
+ '(rm-blacklist (quote (" hl-p" "undo-tree")))
  '(save-place t nil (saveplace))
  '(scroll-bar-mode nil)
+ '(scss-compile-at-save nil)
  '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(sml/mode-width
+   (if
+       (eq powerline-default-separator
+	   (quote arrow))
+       (quote right)
+     (quote full)))
+ '(sml/name-width 40)
+ '(sml/pos-id-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s" powerline-default-separator
+			    (car powerline-default-separator-dir)))
+		   (quote powerline-active1)
+		   (quote powerline-active2))))
+     (:propertize " " face powerline-active2))))
+ '(sml/pos-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s" powerline-default-separator
+			    (cdr powerline-default-separator-dir)))
+		   (quote powerline-active1)
+		   nil)))
+     (:propertize " " face sml/global))))
+ '(sml/pre-id-separator
+   (quote
+    (""
+     (:propertize " " face sml/global)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s" powerline-default-separator
+			    (car powerline-default-separator-dir)))
+		   nil
+		   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active2)
+     (:eval
+      (propertize " "
+		  (quote display)
+		  (funcall
+		   (intern
+		    (format "powerline-%s-%s" powerline-default-separator
+			    (cdr powerline-default-separator-dir)))
+		   (quote powerline-active2)
+		   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes)))
+ '(sml/replacer-regexp-list
+   (quote
+    (("^/srv/data/documents/" ":Org:")
+     ("^~/\\.emacs\\.d/" ":ED:")
+     ("^/sudo:.*:" ":SU:")
+     ("^~/Documents/" ":Doc:")
+     ("^~/Dropbox/" ":DB:")
+     ("^:\\([^:]*\\):Documento?s/" ":\\1/Doc:")
+     ("^~/[Gg]it/" ":Git:")
+     ("^~/[Gg]it[Hh]ub/" ":Git:")
+     ("^~/[Gg]it\\([Hh]ub\\|\\)-?[Pp]rojects/" ":Git:")
+     ("^/srv" ":Srv:")
+     ("^:Srv:/git" ":Git:")
+     (":Doc:codex" ":Codex:"))))
+ '(sml/theme (quote dark))
+ '(tool-bar-mode nil)
+ '(transient-mark-mode (quote (only . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground nil :background nil :family "Terminus" :foundry "xos4" :slant normal :weight normal :height 105 :width normal))))
+ '(default ((t (:foreground nil :background nil :family "Monaco" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
  '(jabber-chat-prompt-foreign ((t (:foreground "orange red" :weight bold))))
  '(jabber-chat-prompt-local ((t (:foreground "deep sky blue" :weight bold))))
  '(jabber-roster-user-away ((t (:foreground "gold" :slant italic :weight normal))))
@@ -88,10 +188,9 @@
 ;; Set org-mode default major mode
 (setq initial-major-mode 'org-mode)
 ;; Add some loadpaths
-(add-to-list 'load-path  "~/.emacs.d")
+;;(add-to-list 'load-path  "~/.emacs.d")
 ;;Load private file
 (load "~/.emacs.d/init-credentials")
-
 ;; Add better unicode support, but makes emacs extremely slow on startup
 ;(require 'unicode-fonts)
 ;(unicode-fonts-setup)
@@ -228,8 +327,13 @@
 (global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
 (global-set-key (kbd "C-y") 'clipboard-yank)
 
+;;Load undo-tree mode
+(require 'undo-tree)
+(global-undo-tree-mode)
 ;; Undo/Redo
+(defalias 'redo 'undo-tree-redo)
 (global-set-key (kbd "C-z") 'undo) ; 【Ctrl+z】
+(global-set-key (kbd "C-S-z") 'redo) ; 【Ctrl+Shift+z】;  Mac style
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs daemon shutdown
@@ -327,9 +431,9 @@
 ;; Orgmode Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; var declaration
-;(setq org-mobile-inbox-for-pull "~/org/notes.org")
-;(setq org-mobile-directory "/data/Documents/Dropbox/MobileOrg")
-(setq org-directory "/data/Documents/org-mode")
+;(setq org-mobile-inbox-for-pull "~/documents/notes.org")
+;(setq org-mobile-directory "/data/documents/Dropbox/MobileOrg")
+(setq org-directory "/data/documents/")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 ;; Keyboard Setup
@@ -452,3 +556,7 @@
 
 ;; Kill scratch
 (kill-buffer "*scratch*")
+
+;; Enable smart mode line
+(require 'smart-mode-line)
+(sml/setup)
