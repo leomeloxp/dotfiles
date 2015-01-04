@@ -58,21 +58,21 @@ bindsym $mod+a focus parent
 bindsym F1 workspace 1:mayuri
 bindsym F2 workspace 2:code
 bindsym F3 workspace 3:web
-bindsym F4 workspace 4:chat
-bindsym $mod+F1 workspace 5:gimp
-bindsym $mod+F2 workspace 6:
-bindsym $mod+F3 workspace 7:
-bindsym $mod+F4 workspace 8:
+bindsym F4 workspace 4:other
+bindsym $mod+F1 exec ~/.i3/get_workspace_options.py | dmenu | ~/.i3/go_to_workspace.py #workspace 5:gimp
 
 # move focused container to workspace
 bindsym Shift+F1 move container to workspace 1:mayuri
 bindsym Shift+F2 move container to workspace 2:code
 bindsym Shift+F3 move container to workspace 3:web
-bindsym Shift+F4 move container to workspace 4:chat
-bindsym $mod+Shift+F1 move container to workspace 5:gimp
-bindsym $mod+Shift+F2 move container to workspace 6:
-bindsym $mod+Shift+F3 move container to workspace 7:
-bindsym $mod+Shift+F4 move container to workspace 8:
+bindsym Shift+F4 move container to workspace 4:other
+bindsym $mod+Shift+F1 exec ~/.i3/get_workspace_options.py | dmenu | ~/.i3/move_to_workspace.py #move container to workspace 5:gimp
+# As it says
+bindsym $mod+F2 move workspace to output left
+
+# Dynamic workspace tagging
+#bindsym $mod+t exec ~/.i3/get_workspace_options.py | dmenu | ~/.i3/go_to_workspace.py
+#bindsym $mod+Shift+t exec ~/.i3/get_workspace_options.py | dmenu | ~/.i3/move_to_workspace.py
 
 ########################################
 ## Session MGMT
