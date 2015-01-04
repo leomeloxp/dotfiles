@@ -5,10 +5,10 @@
 ############################
 
 ########## Variables
-dir=~/
+dir=~
 gitdir=/srv/git/dotfiles                    # dotfiles directory
 olddir=/srv/git/oldfiles/dotfiles           # old dotfiles backup directory
-files="conky emacs.d bashrc emacs fehbg openbox tint2 xinitrc Xresources zprofile zshrc"    # list of files/folders to symlink in homedir
+files="conky i3 ncmpcpp openbox bashrc emacs fehbg  tmux.conf xinitrc Xresources zprofile zshrc"    # list of files/folders to symlink in homedir
 ##########
 
 # create dotfiles_old in homedir
