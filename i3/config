@@ -125,8 +125,9 @@ exec --no-startup-id pcmanfm -d
 # Start tilda
 exec --no-startup-id tilda -h
 # Start emacs daemon
-exec --no-startup-id emacs --daemon
-
+exec --no-startup-id emacs-24.4 --daemon
+# Start Dropbox daemon
+exec --no-startup-id dropboxd
 
 ########################################
 ## Workspace assignments
