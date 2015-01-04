@@ -4,7 +4,7 @@
 ## Set mod key to Win Key
 set $mod Mod4
 ## Terminus font with somewhat okay  unicode support
-font pango:Terminus 12px
+font pango:Monaco 12px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # start a terminal
