@@ -136,12 +136,12 @@ exec --no-startup-id dropboxd
 workspace "1:mayuri" output VGA1
 workspace "2:code" output VGA1
 workspace "3:web" output HDMI1
-workspace "4:chat" output HDMI1
+workspace "4:other" output HDMI1
 ## Container to workspace
 assign [class="Lxterminal"] 1:mayuri
 assign [class="Emacs"] 2:code
 assign [class="Chromium"] 3:web
-assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 4:chat
+assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 4:other
 new_window 1pixel
 new_float normal
 ########################################
