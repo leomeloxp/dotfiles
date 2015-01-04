@@ -178,21 +178,30 @@ bindsym $mod+Next exec mpc volume -5
 ## Volume Keys
 ########################################
 
-## HDMI
-bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 0 down
-bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 0 up
-bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 0 toggle
+## HDMI (unactive)
+bindsym Ctrl+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 0 down
+bindsym Ctrl+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 0 up
+bindsym Ctrl+XF86AudioMute exec /srv/git/scripts/volcontrol 0 toggle
+
+## USB Audio
+bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 1 down
+bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 1 up
+bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 1 toggle
 
 ## Analog Audio
-bindsym Shift+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 1 down
-bindsym Shift+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 1 up
-bindsym Shift+XF86AudioMute exec /srv/git/scripts/volcontrol 1 toggle
+bindsym Shift+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 2 down
+bindsym Shift+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 2 up
+bindsym Shift+XF86AudioMute exec /srv/git/scripts/volcontrol 2 toggle
 
 ## Combined Sink
-bindsym $mod+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 2 down
-bindsym $mod+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 2 up
-bindsym $mod+XF86AudioMute exec /srv/git/scripts/volcontrol 2 toggle
+bindsym $mod+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 3 down
+bindsym $mod+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 3 up
+bindsym $mod+XF86AudioMute exec /srv/git/scripts/volcontrol 3 toggle
 
+## Other (future-proofing)
+bindsym Ctrl+Shift+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 4 down
+bindsym Ctrl+Shift+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 4 up
+bindsym Ctrl+Shift+XF86AudioMute exec /srv/git/scripts/volcontrol 4 toggle
 
 focus_follows_mouse no
 # Start i3bar to display a workspace bar (plus the system information i3status
