@@ -8,6 +8,7 @@ mpd_host = "localhost"
 mpd_port = "6600"
 mpd_music_dir = "/srv/mpd/music/"
 external_editor = "leafpad"
+allow_for_physical_item_deletion= yes
 
 ##Top bar
 alternative_header_first_line_format = "$b$5{%t}|{%f}$9$/b"
