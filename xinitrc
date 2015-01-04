@@ -26,5 +26,6 @@ export XMODIFIERS='@im=uim'
 
 #exec openbox-session
 exec i3
+#exec startkde
 #system basics
 #xrdb ~/.Xresources
