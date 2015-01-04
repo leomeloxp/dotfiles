@@ -70,6 +70,9 @@ status.register("wireless",
 status.register("disk",
                 path="/",
                 format="ssd:{avail}G",)
+status.register("disk",
+                path="/srv/",
+                format="srv:{avail}G",)
 
 # weather
 status.register("weather",
