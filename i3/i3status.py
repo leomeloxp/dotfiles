@@ -52,8 +52,7 @@ status.register("battery",
 # Note: the network module requires PyPI package netifaces
 status.register("network",
                 interface="enp4s0",
-                format_up="{v4}",
-                format_down="")
+                format_up="{interface}:{v4}",)
 
 # Has all the options of the normal network and adds some wireless specific things
 # like quality and network names.
