@@ -160,6 +160,7 @@ bindsym $mod+3 exec emacsclient -c
 bindsym $mod+4 exec chromium
 bindsym $mod+5 exec lxterminal -e "ncmpcpp"
 bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/mpd2twitter.py
+bindsym --release Print exec scrot -s -e 'mv $f ~/pictures/screenshot/'
 
 ########################################
 ## MPD Controlling
