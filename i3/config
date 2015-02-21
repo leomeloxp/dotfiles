@@ -159,6 +159,7 @@ bindsym $mod+Shift+2 exec lxterminal
 bindsym $mod+3 exec emacsclient -c
 bindsym $mod+4 exec chromium
 bindsym $mod+5 exec lxterminal -e "ncmpcpp"
+bindsym XF86AudioMedia exec lxterminal -e "ncmpcpp"
 bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/mpd2twitter.py
 bindsym --release Print exec scrot -s -e 'mv $f ~/pictures/screenshot/'
 
@@ -170,6 +171,10 @@ bindsym $mod+Left exec /srv/git/scripts/mpcPrevSong.sh
 bindsym $mod+Down exec mpc stop
 bindsym $mod+Up exec mpc toggle
 bindsym $mod+Right exec mpc next
+
+bindsym XF86AudioPrev exec /srv/git/scripts/mpcPrevSong.sh
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioNext exec mpc next
 
 ## MPD Internal Volume
 bindsym $mod+Prior exec mpc volume +5
