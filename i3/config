@@ -115,7 +115,8 @@ popup_during_fullscreen leave_fullscreen
 #########################################
 ## Application Launching
 #########################################
-exec --no-startup-id setxkbmap gb extd
+## Set the keyboard map, international support and compose key
+exec --no-startup-id setxkbmap -model pc104 -layout gb -variant intl -option compose:caps
 ## HDMI check ##
 exec --no-startup-id /srv/git/scripts/hdmi
 ## Others
