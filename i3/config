@@ -158,6 +158,7 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+1 exec pcmanfm
 bindsym $mod+Shift+2 exec lxterminal
 bindsym $mod+3 exec emacsclient -c
+bindsym $mod+Shift+3 exec subl3
 bindsym $mod+4 exec chromium
 bindsym $mod+5 exec lxterminal -e "ncmpcpp"
 bindsym XF86AudioMedia exec lxterminal -e "ncmpcpp"
