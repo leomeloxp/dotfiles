@@ -1,1 +1,2 @@
-feh  --bg-fill '/srv/data/Pictures/wallpaper/mayuri/mayuri5.jpg' 
+#!/bin/sh
+feh  --bg-fill '/srv/data/pictures/wallpaper/mayuri/mayuri5.jpg' 
