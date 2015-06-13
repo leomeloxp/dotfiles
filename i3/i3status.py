@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Full documentation of this file can be found at:
+# http://docs.enkore.de/i3pystatus/index.html
+# package name is i3pystatus-git (in Arch Linux)
+
 import subprocess
 
 from i3pystatus import *
@@ -14,86 +18,69 @@ status.register("clock",
                 color ="#0099CC",
             )
 
-# Shows the average load of the last minute and the last 5 minutes
-# (the default value for format is used)
-status.register("load",
-                format="{avg1}")
+status.register("keyboard_locks",
+                format="{num}",
+                color="#0099CC",
+            )
 
-# Shows your CPU temperature, if you have a Intel CPU
+status.register("cpu_usage_graph",
+                format="{cpu_graph}",
+                start_color="green",
+                end_color="red",
+                graph_width=7,
+                graph_style="braille-fill",
+                )
 
-status.register("temp",
-                format="{temp:.0f}°C",
-                color="#0099CC")
+status.register("cpu_usage",
+                format="CPU:{usage:1}%",
+                )
 
-# The battery monitor has many formatting options, see README for details
+status.register("mem",
+                format="RAM:{percent_used_mem}%"
+                )
 
-# This would look like this, when discharging (or charging)
-# ↓14.22W 56.15% [77.81%] 2h:41m
-# And like this if full:
-# =14.22W 100.0% [91.21%]
-#
-# This would also display a desktop notification (via dbus) if the percentage
-# goes below 5 percent while discharging. The block will also color RED.
-status.register("battery",
-                format="{status}{percentage:.0f}% [{remaining:%E%hh:%Mm}]",
-                alert=True,
-                alert_percentage=10,
-                status={
-                    "DIS": "↓",
-                    "CHR": "↑",
-                    "FULL": "✓",
-                },)
-# Shows the address and up/down state of eth0. If it is up the address is shown in
-# green (the default value of color_up) and the CIDR-address is shown
-# (i.e. 10.10.10.42/24).
-# If it's down just the interface name (eth0) will be displayed in red
-# (defaults of format_down and color_down)
-#
-# Note: the network module requires PyPI package netifaces
 status.register("network",
-                interface="enp4s0",
-                format_up="{interface}:{v4}",)
+                interface="enp2s0",
+                format_up="{interface}:{kbs}KB/s|{network_graph}",
+                format_down="wired is down",
+                dynamic_color=True,
+                start_color="#0099CC",
+                end_color="#00FF00",
+                graph_width=7,
+)
 
-# Has all the options of the normal network and adds some wireless specific things
-# like quality and network names.
-#
-# Note: requires both netifaces and basiciw
-status.register("wireless",
-                interface="wlp2s0",
-                format_up="{essid} {quality:02.0f}%",)
-
-# Shows disk available space
-# status.register("disk",
-#                 path="/data",
-#                 format="data:{avail}G",)
 status.register("disk",
                 path="/",
+                display_limit=20,
+                critical_limit= 5,
                 format="ssd:{avail}G",)
 status.register("disk",
                 path="/srv/",
+                display_limit=80,
+                critical_limit= 20,
                 format="srv:{avail}G",)
-
-# weather
-status.register("weather",
-                location_code="JEXX0001",
-                colorize=True,
-                format="Jersey:{current_temp}[{humidity}%]",)
-
 
 # Shows pulseaudio default sink volume
 status.register("pulseaudio",
-                format="{muted}:{volume}",
+                format="{muted}:{volume}% {volume_bar}",
+                color_unmuted="#0099CC",
+                multi_colors=True,
                 muted="X",
                 unmuted="♫",
             )
 
-# Shows mpd status
-status.register("mpd",
-                format="{status} {title} - {artist} \[ {album} \]",
-                status={
-                    "pause": "▷",
-                    "play": "▶",
-                    "stop": "◾",
-                },)
+# # Shows mpd status
+# status.register("mpd",
+#                 format="{status} {title} - {artist} \[ {album} \]",
+#                 status={
+#                     "pause": "▷",
+#                     "play": "▶",
+#                     "stop": "◾",
+#                 },)
+
+status.register("spotify",
+                format="{title} - {artist}",
+                color="#0099CC"
+                )
 
 status.run()

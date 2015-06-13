@@ -117,8 +117,10 @@ popup_during_fullscreen leave_fullscreen
 #########################################
 ## Set the keyboard map, international support and compose key
 exec --no-startup-id setxkbmap -model pc104 -layout gb -variant extd -option compose:caps
-## HDMI check ##
-exec --no-startup-id /srv/git/scripts/hdmi
+## Dual Monitors##
+exec --no-startup-id ~/.screenlayout/double1920p.sh
+## Set Wallpaper ##
+exec --no-startup-id ~/.fehbg
 ## Others
 exec --no-startup-id volnoti 
 #synapse -s 
@@ -126,7 +128,7 @@ exec --no-startup-id pcmanfm -d
 # Start tilda
 exec --no-startup-id tilda -h
 # Start emacs daemon
-exec --no-startup-id emacs-24.4 --daemon
+exec --no-startup-id emacs --daemon
 # Start Dropbox daemon
 exec --no-startup-id dropboxd
 
@@ -134,10 +136,10 @@ exec --no-startup-id dropboxd
 ## Workspace assignments
 ########################################
 ## Workspace to output
-workspace "1:mayuri" output HDMI1
-workspace "2:code" output HDMI1
-workspace "3:web" output VGA1
-workspace "4:other" output VGA1
+workspace "1:mayuri" output DVI-0
+workspace "2:code" output DVI-0
+workspace "3:web" output DVI-1
+workspace "4:other" output DVI-1
 ## Container to workspace
 assign [class="Lxterminal"] 1:mayuri
 assign [class="Emacs"] 2:code
@@ -161,8 +163,8 @@ bindsym $mod+3 exec emacsclient -c
 bindsym $mod+Shift+3 exec subl3
 bindsym $mod+4 exec chromium
 bindsym $mod+5 exec lxterminal -e "ncmpcpp"
-bindsym XF86AudioMedia exec lxterminal -e "ncmpcpp"
-bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/mpd2twitter.py
+bindsym XF86AudioMedia exec spotify
+bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/nowplaying.sh
 bindsym --release Print exec scrot -s -e 'mv $f ~/pictures/screenshot/'
 
 ########################################
@@ -174,9 +176,9 @@ bindsym $mod+Down exec mpc stop
 bindsym $mod+Up exec mpc toggle
 bindsym $mod+Right exec mpc next
 
-bindsym XF86AudioPrev exec /srv/git/scripts/mpcPrevSong.sh
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
 
 ## MPD Internal Volume
 bindsym $mod+Prior exec mpc volume +5
@@ -187,30 +189,10 @@ bindsym $mod+Next exec mpc volume -5
 ## Volume Keys
 ########################################
 
-## HDMI (unactive)
-bindsym Ctrl+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 0 down
-bindsym Ctrl+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 0 up
-bindsym Ctrl+XF86AudioMute exec /srv/git/scripts/volcontrol 0 toggle
-
-## USB Audio
-bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 1 down
-bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 1 up
-bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 1 toggle
-
-## Analog Audio
-bindsym Shift+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 2 down
-bindsym Shift+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 2 up
-bindsym Shift+XF86AudioMute exec /srv/git/scripts/volcontrol 2 toggle
-
-## Combined Sink
-bindsym $mod+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 3 down
-bindsym $mod+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 3 up
-bindsym $mod+XF86AudioMute exec /srv/git/scripts/volcontrol 3 toggle
-
-## Other (future-proofing)
-bindsym Ctrl+Shift+XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 4 down
-bindsym Ctrl+Shift+XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 4 up
-bindsym Ctrl+Shift+XF86AudioMute exec /srv/git/scripts/volcontrol 4 toggle
+## Output 0
+bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 0 down
+bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 0 up
+bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 0 toggle
 
 focus_follows_mouse no
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -219,6 +201,6 @@ bar {
     status_command    python ~/.i3/i3status.py
     position          top
     workspace_buttons yes
-    tray_output	      VGA1
+    tray_output	      DVI-0
     strip_workspace_numbers yes
     }
