@@ -202,6 +202,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym $mod+Prior exec mpc volume +5
 bindsym $mod+Next exec mpc volume -5
 
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 ########################################
 ## Volume Keys
@@ -213,12 +214,44 @@ bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 1 up
 bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 1 toggle
 
 focus_follows_mouse no
+
+# Define solirized colours
+set $white         #FFFFFF
+set $black         #000000
+set $greydk        #212121
+set $greynm        #9E9E9E
+set $greyblue      #263238
+set $brown         #795548
+set $deeporange    #FF5722
+set $lime          #CDDC39
+set $cyan          #00BCD4
+set $bluelg        #03A9f4
+set $blue          #2196F3
+set $indigo        #3F51B5
+set $purple        #2196F3
+set $red           #F44336
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command    python ~/.i3/i3status.py
-    position          top
-    workspace_buttons yes
-    tray_output	      DVI-0
+
+    font                    pango:Monaco, FontAwesome, Icons 9
+    position                top
     strip_workspace_numbers yes
+    status_command          i3blocks -c ~/.i3/i3-blocks-1
+    tray_output             $vp2    
+    workspace_buttons       yes
+
+    colors {
+        # selector          borders
+        background          $greydk
+        statusline          $greydk
+        separator           $cyan
+
+        # selector          borders bckgrnd fregrnd
+        focused_workspace	$greydk	$greydk	$cyan
+        active_workspace	$greydk	$greydk	$bluelg
+        inactive_workspace	$greydk	$greydk	$greynm
+        urgent_workspace	$greydk	$greydk	$red
     }
+}

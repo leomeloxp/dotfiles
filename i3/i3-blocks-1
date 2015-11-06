@@ -1,0 +1,155 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/libexec/i3blocks/$BLOCK_NAME
+# command=~/.i3/i3blocks-contrib/$BLOCK_NAME/$BLOCK_NAME
+markup=none
+align=center
+color=#0099CC
+interval=5
+
+full_text=/
+align=center
+separator=false
+separator_block_width=7
+
+#########
+##  Leo's old bar's order
+####
+## Music
+## Volume
+## Weather
+## /srv
+## network name, down traffic and graph
+## RAM %
+## CPU %
+## CPU graph
+## Numlock
+## Date/Time
+
+#[FocusedWindow]
+#command=xdotool getactivewindow getwindowname 2>/dev/null || echo "None"
+#interval=repeat
+#align=center
+
+#[separator]
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+[mediaplayer]
+instance=spotify
+signal=10
+
+[separator]
+
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+[volume]
+command=pamixer -s 1 --get-volume
+interval=1
+label=VOL
+label=♫
+signal=10
+
+[separator]
+
+[updates]
+label=pkgs:
+command=checkupdates | wc -l
+interval=100
+
+[separator]
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+[disk]
+label=root
+instance=/
+interval=30
+separator=false
+
+[separator]
+
+[disk]
+label=srv
+instance=/srv
+interval=30
+
+[separator]
+
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+[iface]
+instance=enp2s0
+interval=10
+
+#[External IP]
+#command=curl icanhazip.com
+#interval=6000
+#separator=false
+
+[bandwidth]
+instance=enp2s0
+
+[separator]
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=CPU:
+interval=10
+
+
+[memory]
+label=RAM:
+instance=MemTotal
+interval=1
+
+[separator]
+
+[keyindicator]
+command=~/.i3/i3blocks-contrib/$BLOCK_NAME/$BLOCK_NAME
+instance=NUM
+interval=once
+signal=11
+
+[separator]
+
+[time]
+command=LC_TIME=ja_JP.UTF-8 date '+%m月%d日 %H時%M分'
+
