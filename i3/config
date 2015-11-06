@@ -3,8 +3,17 @@
 #############################################################################
 ## Set mod key to Win Key
 set $mod Mod4
+## Set Workspace and Displays Variables
+set $wp1 1:|mayuri
+set $wp2 2:|code
+set $wp3 3:|web
+set $wp4 4:|other
+set $wpSteam 6:|steam
+set $vp1 DVI-0
+set $vp2 DVI-1
+
 ## Terminus font with somewhat okay  unicode support
-font pango:Monaco 12px
+#font pango:Monaco 12px
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # start a terminal
@@ -43,7 +52,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-#bindsym $mod+Shift+space floating toggle
+bindsym $mod+Ctrl+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -55,17 +64,18 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym F1 workspace 1:mayuri
-bindsym F2 workspace 2:code
-bindsym F3 workspace 3:web
-bindsym F4 workspace 4:other
+bindsym F1 workspace $wp1
+bindsym F2 workspace $wp2
+bindsym F3 workspace $wp3
+bindsym F4 workspace $wp4
+bindsym F5 workspace $wpSteam
 bindsym $mod+F1 exec ~/.i3/get_workspace_options.py | dmenu | ~/.i3/go_to_workspace.py #workspace 5:gimp
 
 # move focused container to workspace
-bindsym Shift+F1 move container to workspace 1:mayuri
-bindsym Shift+F2 move container to workspace 2:code
-bindsym Shift+F3 move container to workspace 3:web
-bindsym Shift+F4 move container to workspace 4:other
+bindsym Shift+F1 move container to workspace $wp1
+bindsym Shift+F2 move container to workspace $wp2
+bindsym Shift+F3 move container to workspace $wp3
+bindsym Shift+F4 move container to workspace $wp4
 bindsym $mod+Shift+F1 exec ~/.i3/get_workspace_options.py | dmenu | ~/.i3/move_to_workspace.py #move container to workspace 5:gimp
 # As it says
 bindsym $mod+F2 move workspace to output left
@@ -130,23 +140,30 @@ exec --no-startup-id tilda -h
 # Start emacs daemon
 exec --no-startup-id emacs --daemon
 # Start Dropbox daemon
-exec --no-startup-id dropboxd
+exec --no-startup-id dropbox
 
 ########################################
 ## Workspace assignments
 ########################################
 ## Workspace to output
-workspace "1:mayuri" output DVI-0
-workspace "2:code" output DVI-0
-workspace "3:web" output DVI-1
-workspace "4:other" output DVI-1
+workspace "$wp1" output $vp1
+workspace "$wp2" output $vp1
+workspace "$wp3" output $vp2
+workspace "$wp4" output $vp2
+workspace "$wpSteam" output $vp2
 ## Container to workspace
-assign [class="Lxterminal"] 1:mayuri
-assign [class="Emacs"] 2:code
-assign [class="Chromium"] 3:web
-assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 4:other
+assign [class="Lxterminal"] $wp1
+assign [class="Emacs"] $wp2
+assign [class="google-chrome" title="^(?!Hangouts).+"] $wp3
+assign [class="google-chrome" title="^Hangouts"]  $wp4
+assign [class="Steam"]  $wpSteam
+##
 new_window 1pixel
 new_float normal
+## Window to Container
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="Preferences$"] floating enable
 ########################################
 ## Alt+Tab
 ########################################
@@ -161,9 +178,10 @@ bindsym $mod+1 exec pcmanfm
 bindsym $mod+Shift+2 exec lxterminal
 bindsym $mod+3 exec emacsclient -c
 bindsym $mod+Shift+3 exec subl3
-bindsym $mod+4 exec chromium
+bindsym $mod+4 exec google-chrome-stable
 bindsym $mod+5 exec lxterminal -e "ncmpcpp"
 bindsym XF86AudioMedia exec spotify
+bindsym XF86Tools exec spotify
 bindsym $mod+Shift+1 exec --no-startup-id /srv/git/scripts/nowplaying.sh
 bindsym --release Print exec scrot -s -e 'mv $f ~/pictures/screenshot/'
 
@@ -190,9 +208,9 @@ bindsym $mod+Next exec mpc volume -5
 ########################################
 
 ## Output 0
-bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 0 down
-bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 0 up
-bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 0 toggle
+bindsym XF86AudioLowerVolume exec /srv/git/scripts/volcontrol 1 down
+bindsym XF86AudioRaiseVolume exec /srv/git/scripts/volcontrol 1 up
+bindsym XF86AudioMute exec /srv/git/scripts/volcontrol 1 toggle
 
 focus_follows_mouse no
 # Start i3bar to display a workspace bar (plus the system information i3status
